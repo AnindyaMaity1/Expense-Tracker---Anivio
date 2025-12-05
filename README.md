@@ -18,9 +18,7 @@
 
 ## 🎯 Live Demo
 
-Experience ANIVIO in action: **[Live Demo Link]()**
-
-> ⚠️ **Note:** Add your live demo URL to the link above to deploy your application.
+Experience ANIVIO in action: **[Live Demo Link](https://anivio.netlify.app)**
 
 ---
 
