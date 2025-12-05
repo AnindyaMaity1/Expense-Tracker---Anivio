@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Anivio – Smart Expense Tracker</title>
+  <link rel="stylesheet" href="styles.css" />
+  <meta name="app-version" content="2.0" />
+  
+  <link rel="icon" type="image/png" href="image.png" sizes="32x32">
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</head>
+
+<body>
+
+<!-- ========================= HEADER ========================= -->
+<header class="app-header">
+  <div class="header-brand">
+    <h1 class="brand-logo">Anivio</h1>
+    <p class="brand-tagline">Expense Tracker</p>
+  </div>
+
+  <div class="header-actions" id="headerActions" aria-hidden="true">
+    <label class="control">
+      <span>View date</span>
+      <input type="date" id="viewDate">
+    </label>
+
+    <label class="control">
+      <span>View month</span>
+      <input type="month" id="viewMonth">
+    </label>
+
+    <label class="control">
+      <span>Filter category</span>
+      <select id="filterCategory">
+        <option value="">All</option>
+        <option>Food</option>
+        <option>Transport</option>
+        <option>Shopping</option>
+        <option>Bills</option>
+        <option>Health</option>
+        <option>Entertainment</option>
+        <option>Other</option>
+      </select>
+    </label>
+
+    <button id="clearAll" class="btn danger">Clear All</button>
+  </div>
+
+  <!-- Hamburger Menu for Mobile -->
+  <button id="navToggle" class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="headerActions">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
+
+<main class="container">
+
+  <!-- ========================= SUMMARY ========================= -->
+  <section class="summary">
+    <div class="card total">
+      <div class="card-title">Total Spent</div>
+      <div class="card-value" id="totalSpent">₹0.00</div>
+      <div class="card-sub" id="totalCount">0 items</div>
+    </div>
+
+    <div id="categorySummary" class="card-grid"></div>
+  </section>
+
+  <!-- ========================= SETTINGS (ONE ROW, TWO COLUMNS) ========================= -->
+  <section class="settings-section">
+    <h2>Settings</h2>
+
+    <!-- single-row, two-column layout -->
+    <div class="settings-two-col-row">
+
+      <!-- Currency -->
+      <div class="card">
+        <div class="card-title">Currency</div>
+        <select id="currencySelect">
+          <option value="INR">INR ₹</option>
+          <option value="USD">USD $</option>
+          <option value="EUR">EUR €</option>
+          <option value="GBP">GBP £</option>
+        </select>
+      </div>
+
+      <!-- Export / Import -->
+      <div class="card">
+        <div class="card-title">Export & Import</div>
+        <div class="data-row">
+          <button id="printBtn" class="btn secondary">Download PDF</button>
+
+          <label class="btn success">
+            Import JSON
+            <input type="file" id="importFile" accept="application/json" hidden>
+          </label>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========================= INSIGHTS ========================= -->
+  <section class="charts-section">
+    <h2>Insights</h2>
+
+    <div class="charts-grid">
+
+      <div class="card">
+        <div class="card-title">By Category</div>
+          <canvas id="pieChart" width="400" height="260"></canvas>
+          <div id="pieTooltip" class="chart-tooltip" style="display:none"></div>
+          <div id="chartLegend" class="legend"></div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Spent vs Remaining</div>
+        <canvas id="barChart" width="400" height="260"></canvas>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========================= ADD EXPENSE FORM ========================= -->
+  <section class="form-section">
+    <h2>Add Expense</h2>
+
+    <form id="expenseForm" class="expense-form">
+
+      <div class="field">
+        <label>Amount</label>
+        <input type="number" id="amount" min="0" step="0.01" required placeholder="0.00">
+      </div>
+
+      <div class="field">
+        <label>Category</label>
+        <select id="category" required>
+          <option disabled selected value="">Select</option>
+          <option>Food</option>
+          <option>Transport</option>
+          <option>Shopping</option>
+          <option>Bills</option>
+          <option>Health</option>
+          <option>Entertainment</option>
+          <option>Other</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>Date</label>
+        <input type="date" id="date" required>
+      </div>
+
+      <div class="field grow">
+        <label>Note</label>
+        <input type="text" id="note" placeholder="Optional note">
+      </div>
+
+      <button type="submit" class="btn primary">Add</button>
+    </form>
+  </section>
+
+  <!-- ========================= EXPENSE LIST ========================= -->
+  <section class="list-section">
+    <h2>Expenses</h2>
+
+    <div class="list-controls">
+      <input type="text" id="searchText" placeholder="Search notes or category">
+    </div>
+
+    <div class="table-wrap">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Category</th>
+            <th>Note</th>
+            <th class="right">Amount</th>
+            <th></th>
+          </tr>
+        </thead>
+
+        <tbody id="expenseList"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ========================= BUDGETS (RESPONSIVE) ========================= -->
+  <section class="budgets-section">
+    <h2>Budgets</h2>
+
+    <div class="card">
+      <!-- Total Budget Row -->
+      <div class="budget-total-row">
+        <div class="budget-total-col col-1">
+          <label>Budget</label>
+        </div>
+        <div class="budget-total-col col-2">
+          <input type="number" id="totalBudget" class="budget-input" min="0" step="10" value="0">
+        </div>
+        <div class="budget-total-col col-3">
+        </div>
+        <div class="budget-total-col col-4">
+          <div id="totalBudgetStatus" class="budget-status"></div>
+        </div>
+      </div>
+
+      <!-- Responsive Budgets Container -->
+      <div class="budgets-container">
+        <!-- Large Screen Table -->
+        <div class="budgets-table-wrapper">
+          <table class="budgets-table" id="budgetsTable">
+            <colgroup>
+              <col class="col-category" />
+              <col class="col-progress" />
+              <col class="col-status" />
+              <col class="col-spent" />
+              <col class="col-remaining" />
+              <col class="col-budget" />
+              <col class="col-edit" />
+            </colgroup>
+            <thead>
+              <tr>
+                <th class="col-category">Category</th>
+                <th class="col-progress">Progress</th>
+                <th class="col-status">Status</th>
+                <th class="col-spent">Spent</th>
+                <th class="col-remaining">Remaining</th>
+                <th class="col-budget">Budget</th>
+                <th class="col-edit">Action</th>
+              </tr>
+            </thead>
+            <tbody id="budgetsTableBody"></tbody>
+          </table>
+        </div>
+
+        <!-- Small Screen Cards Grid -->
+        <div class="budgets-grid" id="budgetsGrid"></div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ========================= PRINT AREA (HIDDEN) ========================= -->
+<div id="printArea" class="print-area" hidden></div>
+
+<!-- ========================= BUDGET MODAL ========================= -->
+<div id="budgetModal" hidden>
+  <div class="modal-overlay" data-close="true">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 class="modal-title" id="budgetModalTitle">Set Budget</h3>
+      </div>
+      <div class="modal-body">
+        <label for="budgetModalInput">Amount</label>
+        <input type="number" id="budgetModalInput" class="budget-input" min="0" step="0.01">
+      </div>
+      <div class="modal-footer">
+        <button id="budgetModalCancel" class="modal-cancel">Cancel</button>
+        <button id="budgetModalSave" class="modal-ok">Save</button>
+      </div>
+    </div>
+  </div>
+  <input type="hidden" id="budgetModalCat">
+  <input type="hidden" id="budgetModalPrev">
+</div>
+
+<!-- ========================= MODAL DIALOG ========================= -->
+<div id="modalOverlay" class="modal-overlay" hidden>
+  <div class="modal-card">
+    <div class="modal-header">
+      <h3 id="modalTitle" class="modal-title"></h3>
+    </div>
+    <div class="modal-body">
+      <p id="modalMessage" class="modal-message"></p>
+    </div>
+    <div class="modal-footer">
+      <button id="modalCancel" class="btn modal-cancel">Cancel</button>
+      <button id="modalOK" class="btn modal-ok">OK</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- ========================= SCRIPT ========================= -->
+<script src="script.js"></script>
+
+</body>
+</html>

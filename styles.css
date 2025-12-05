@@ -1,0 +1,1305 @@
+/* --------------------------------------------------
+   GLOBAL THEME + BASE
+-------------------------------------------------- */
+:root {
+  --bg: #ffffff;
+  --text: #111111;
+  --muted: #666666;
+
+  --violet: #6A0DAD;
+  --yellow: #FFD60A;
+  --green: #10B981;
+  --black: #000000;
+
+  --violet-100: #ede6f7;
+  --yellow-100: #fff6bf;
+  --green-100: #d9f5ea;
+
+  --border: #e5e7eb;
+  --shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+
+  --accent: var(--violet);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 16px/1.5 system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell,
+    sans-serif;
+}
+
+/* --------------------------------------------------
+   HEADER
+-------------------------------------------------- */
+.app-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 24px;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+}
+
+.app-header h1 {
+  margin: 0;
+  font-size: 22px;
+  letter-spacing: 0.2px;
+  color: var(--accent);
+}
+
+/* Brand header styling */
+.header-brand {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.brand-logo {
+  margin: 0;
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  background: linear-gradient(135deg, var(--accent), var(--yellow));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.brand-tagline {
+  margin: 0;
+  font-size: 11px;
+  color: var(--muted);
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+/* HEADER ACTIONS */
+.header-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+/* Hamburger Menu */
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  align-items: center;
+}
+
+.nav-toggle span {
+  width: 24px;
+  height: 3px;
+  background: var(--text);
+  border-radius: 2px;
+  transition: 0.3s;
+}
+
+.nav-toggle.active span:nth-child(1) {
+  transform: rotate(45deg) translate(6px, 6px);
+}
+
+.nav-toggle.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.nav-toggle.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+
+.control {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--muted);
+  white-space: normal;
+}
+
+.control input[type="date"],
+.control input[type="month"],
+.control select {
+  padding: 8px 10px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--text);
+}
+
+.control span {
+  font-size: 13px;
+  color: var(--muted);
+  max-width: 90px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: inline-block;
+}
+
+.control input[type="date"],
+.control input[type="month"],
+.control select,
+.control input[type="text"],
+.control input[type="number"] {
+  height: 36px;
+  box-sizing: border-box;
+}
+
+/* --------------------------------------------------
+   CONTAINER
+-------------------------------------------------- */
+.container {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+/* --------------------------------------------------
+   SUMMARY CARDS (INSIGHTS)
+-------------------------------------------------- */
+.summary {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+.card {
+  border: 1px solid var(--border);
+  background: #fff;
+  border-radius: 12px;
+  padding: 16px; /* Standard card padding */
+  box-shadow: var(--shadow);
+  position: relative;
+}
+
+.card.total {
+  border-color: var(--accent);
+}
+
+.card-title {
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.card-value {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--black);
+}
+
+.card-sub {
+  margin-top: 4px;
+  color: var(--muted);
+}
+
+/* CATEGORY SUMMARY GRID */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.category-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px dashed var(--border);
+  border-radius: 10px;
+  padding: 12px;
+  background: #fff;
+}
+
+.category-badge {
+  display: inline-flex;
+  gap: 8px;
+  padding: 6px 10px;
+  font-weight: 600;
+  border-radius: 999px;
+}
+
+.badge-food { background: var(--yellow-100); color: #6b4e00; }
+.badge-transport { background: var(--green-100); color: #0b6d52; }
+.badge-shopping { background: #f3e8ff; color: var(--violet); }
+.badge-bills { background: #f0f4ff; color: #1f3f8b; }
+.badge-health { background: #ffe0e0; color: #b91c1c; }
+.badge-entertainment { background: #efeaff; color: #4c1d95; }
+.badge-other { background: #f6f7f9; color: #374151; }
+
+/* --------------------------------------------------
+   FORM SECTION
+-------------------------------------------------- */
+.form-section,
+.list-section {
+  margin-top: 24px;
+}
+
+.list-controls input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+}
+
+h2 {
+  margin: 0 0 12px;
+  font-size: 18px;
+  position: relative;
+  color: var(--black);
+}
+
+h2::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 56px;
+  height: 3px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--accent), var(--yellow));
+}
+
+.expense-form {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+@media (min-width: 768px) {
+  .expense-form {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.field.grow {
+  grid-column: span 1;
+}
+
+label {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+input[type="number"],
+input[type="text"],
+input[type="date"],
+select {
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: #fff;
+  /* FIX: Ensure all primary form inputs are full width */
+  width: 100%; 
+}
+
+input::placeholder {
+  color: #9aa2af;
+}
+
+/* --------------------------------------------------
+   BUTTONS
+-------------------------------------------------- */
+.btn {
+  padding: 10px 14px;
+  font-weight: 600;
+  border-radius: 10px;
+  cursor: pointer;
+  border: none;
+}
+
+.btn.primary { background: var(--accent); color: #fff; }
+.btn.secondary { background: var(--yellow); color: #4a3b00; }
+.btn.success { background: var(--green); color: #012b1f; }
+.btn.danger { background: #111; color: #fff; }
+
+/* --------------------------------------------------
+   EXPENSE TABLE (Responsive Table Overhaul)
+-------------------------------------------------- */
+.table-wrap {
+  overflow: hidden;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table thead th {
+  padding: 12px;
+  text-align: left;
+  background: #fafafa;
+  border-bottom: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.table tbody td {
+  padding: 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.table tbody tr:hover {
+  background: #fcfcff;
+}
+
+.right {
+  text-align: right;
+}
+
+.action-btn {
+  padding: 6px 10px;
+  border-radius: 8px;
+  background: #fff;
+  border: 1px solid var(--border);
+  cursor: pointer;
+}
+
+/* Icon button for budget grid/cards (Edit icon) */
+.icon-btn {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  border-radius: 50%; /* Make it round */
+  border: none;
+  background: #f0f0f0;
+  color: var(--muted);
+  transition: all 0.2s;
+}
+
+.icon-btn:hover {
+  background: #e5e7eb;
+  color: var(--text);
+}
+
+
+/* --------------------------------------------------
+   PROGRESS BAR STYLING (NEW UNIVERSAL HEIGHT)
+-------------------------------------------------- */
+.progress {
+  background: #f3f4f6; /* Use a light background */
+  border-radius: 999px; 
+  height: 6px; /* NEW SMALLER HEIGHT */
+  overflow: hidden;
+}
+
+.progress > div {
+  height: 100%;
+  border-radius: 999px;
+  transition: width 0.3s ease;
+}
+
+/* --------------------------------------------------
+   BUDGETS - RESPONSIVE (NEW)
+-------------------------------------------------- */
+
+/* Budgets Container */
+.budgets-container {
+  position: relative;
+  margin-top: 1rem;
+}
+
+/* Large Screen Table */
+.budgets-table-wrapper {
+  display: block;
+}
+
+.budgets-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 8px;
+  table-layout: fixed;
+  min-width: 600px;
+}
+
+.budgets-table th,
+.budgets-table td {
+  padding: 10px 6px;
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.budgets-table th {
+  background: #fafafa;
+  font-size: 12px;
+  color: var(--muted);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.budgets-table td:first-child {
+  font-weight: 500;
+}
+
+/* Amount columns right-aligned (using .right class, but reinforced here) */
+.budgets-table .amount-col {
+  text-align: right !important;
+}
+
+/* Legend dot in table */
+.legend-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 8px;
+}
+
+/* Budget input styling (used inside budget modal) */
+.budget-input {
+  width: 100%;
+  padding: 10px 12px; /* Increased padding for better usability */
+  border: 1px solid var(--border);
+  background: #fff;
+  border-radius: 10px;
+  font-size: 16px;
+  text-align: right;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.budget-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(106, 13, 173, 0.1);
+  outline: none;
+}
+
+/* Table Edit Button: Made more compact to fit smaller column */
+.budgets-table .col-edit .action-btn {
+  padding: 4px 6px; /* Smaller padding */
+  font-size: 11px; /* Smaller font */
+}
+
+
+/* Status pill (not used in JS, but good to keep) */
+.status-pill {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 11px;
+}
+
+/* Small Screen Cards Grid */
+.budgets-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.budget-card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.25rem;
+  box-shadow: var(--shadow);
+  transition: all 0.2s ease;
+}
+
+.budget-card:hover {
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+  transform: translateY(-2px);
+}
+
+.budget-card strong {
+  display: block;
+  margin-bottom: 0.75rem;
+  font-size: 16px;
+  color: var(--black);
+}
+
+.budget-card .progress {
+  /* Inherits height: 6px from .progress */
+  margin: 0.75rem 0; /* Keep margin */
+}
+
+/* Budgets Section */
+.budgets-section { 
+  margin-top: 24px; 
+}
+
+/* --------------------------------------------------
+   TOTAL MONTHLY BUDGET ROW
+-------------------------------------------------- */
+.budget-total-row {
+  display: grid;
+  grid-template-columns: auto auto 1fr;
+  gap: 16px;
+  align-items: center;
+  margin-bottom: 16px;
+  background: #fdfdfd;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px dashed var(--border);
+}
+
+.budget-total-col {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Column 1: Label */
+.budget-total-col.col-1 label {
+  margin: 0;
+  font-weight: 700;
+  color: var(--black);
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+/* Column 2: Input */
+.budget-total-col.col-2 input {
+  padding: 8px 10px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  width: 120px;
+  font-weight: 600;
+}
+
+/* Column 3: Spacer (hidden) */
+.budget-total-col.col-3 {
+  display: none;
+}
+
+/* Column 4: Status */
+.budget-total-col.col-4 {
+  justify-content: center;
+  justify-self: end;
+}
+
+.budget-status {
+  font-weight: 600;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+/* --------------------------------------------------
+   CHARTS
+-------------------------------------------------- */
+.charts-section {
+  margin-top: 24px;
+}
+
+.charts-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+@media (min-width: 768px) {
+  .charts-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.legend {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+.legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: #fff;
+}
+
+.legend-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+#chartLegend { 
+  display: none; 
+}
+
+.chart-tooltip {
+  position: absolute;
+  pointer-events: none;
+  background: rgba(17,17,17,0.95);
+  color: #fff;
+  padding: 8px 10px;
+  border-radius: 8px;
+  font-size: 13px;
+  white-space: nowrap;
+  transform: translate(-50%, -120%);
+  z-index: 40;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.28);
+}
+
+/* --------------------------------------------------
+   SETTINGS
+-------------------------------------------------- */
+.settings-section {
+  margin-top: 24px;
+}
+
+.settings-two-col-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.settings-two-col-row .card {
+  min-height: 84px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.settings-two-col-row select {
+  margin-top: 8px;
+  /* Removed max-width to ensure full width of the column on desktop */
+}
+
+.settings-two-col-row .data-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.settings-two-col-row .data-row .btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* --------------------------------------------------
+   MODAL DIALOG
+-------------------------------------------------- */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.modal-overlay[hidden] {
+  display: none;
+}
+
+.modal-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+  width: 90%;
+  max-width: 400px;
+  overflow: hidden;
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.modal-header {
+  padding: 20px 20px 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.modal-title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--black);
+}
+
+.modal-body {
+  padding: 16px 20px;
+}
+
+.modal-message {
+  margin: 0;
+  color: var(--text);
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.modal-footer {
+  padding: 16px 20px;
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  border-top: 1px solid var(--border);
+}
+
+.modal-cancel {
+  background: #e5e7eb;
+  color: var(--text);
+  padding: 10px 18px;
+  border-radius: 8px;
+}
+
+.modal-ok {
+  background: var(--accent);
+  color: #fff;
+  padding: 10px 18px;
+  border-radius: 8px;
+}
+
+/* --------------------------------------------------
+   UTILITIES (Backdrop & Toast)
+-------------------------------------------------- */
+.nav-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.15); 
+  z-index: 18; 
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 180ms ease;
+}
+
+.nav-backdrop.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 28px;
+  transform: translateX(-50%) translateY(12px);
+  background: rgba(17,17,17,0.95);
+  color: #fff;
+  padding: 10px 14px;
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+  font-weight: 600;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 220ms ease, transform 220ms cubic-bezier(.2,.9,.2,1);
+  z-index: 9999;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+  pointer-events: auto;
+}
+
+.toast.success { background: linear-gradient(90deg, #10B981, #059669); }
+.toast.error { background: linear-gradient(90deg, #EF4444, #C0262E); }
+
+/* --------------------------------------------------
+   PRINT RECEIPT STYLING
+-------------------------------------------------- */
+.print-area {
+  font-family: 'Courier New', monospace;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background: #fff;
+}
+
+.receipt-container {
+  border: 3px solid #000;
+  padding: 30px 20px;
+  text-align: center;
+  background: linear-gradient(to bottom, #fff, #fafafa);
+}
+
+.receipt-header-premium {
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+}
+
+.receipt-brand-section {
+  text-align: center;
+}
+
+.receipt-brand-name {
+  font-size: 28px;
+  font-weight: 900;
+  letter-spacing: 3px;
+  background: linear-gradient(135deg, #6A0DAD, #FFD60A);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin: 0;
+}
+
+.receipt-brand-tagline {
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: #555;
+  font-weight: 600;
+  margin: 4px 0 0 0;
+}
+
+.receipt-top-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin: 15px 0;
+  gap: 20px;
+}
+
+.receipt-left-info {
+  flex: 1;
+  text-align: left;
+}
+
+.receipt-qr-code {
+  flex: 0 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid #000;
+  padding: 8px;
+  background: #fff;
+}
+
+.receipt-qr-code img {
+  max-width: 100px;
+  max-height: 100px;
+}
+
+.summary-box-premium {
+  background: linear-gradient(135deg, #f8f9fa, #f0f4ff);
+  padding: 12px;
+  margin: 10px 0;
+  border: 2px solid #6A0DAD;
+  border-radius: 4px;
+}
+
+.summary-row-double {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 8px 0;
+}
+
+.summary-item {
+  flex: 1;
+  padding: 8px;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  text-align: center;
+}
+
+.summary-label {
+  font-size: 9px;
+  color: #666;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.summary-value {
+  font-size: 14px;
+  font-weight: 900;
+  letter-spacing: 1px;
+}
+
+.receipt-divider { border-bottom: 1px dashed #000; margin: 15px 0; }
+.receipt-divider-thick { border-bottom: 2px solid #000; margin: 15px 0; }
+.receipt-section { text-align: left; margin-bottom: 15px; }
+.receipt-section-title { font-size: 11px; font-weight: bold; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px; border-bottom: 2px solid #000; padding-bottom: 4px; }
+.receipt-row { display: flex; justify-content: space-between; font-size: 11px; margin: 4px 0; white-space: pre; }
+.receipt-row-label { font-weight: 600; }
+.receipt-row-value { text-align: right; }
+
+.print-table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 10px; }
+.print-table thead { border-top: 2px solid #000; border-bottom: 2px solid #000; background: #f5f5f5; }
+.print-table th { padding: 8px 4px; text-align: left; font-weight: bold; font-size: 10px; letter-spacing: 0.5px; }
+.print-table td { padding: 6px 4px; border-bottom: 1px dotted #ddd; }
+.print-table tfoot { border-top: 2px solid #000; border-bottom: 2px solid #000; font-weight: bold; background: #fafafa; }
+.print-table tfoot td { padding: 8px 4px; border-bottom: none; }
+
+.receipt-footer-premium { margin-top: 20px; padding-top: 15px; border-top: 2px dashed #000; text-align: center; font-size: 9px; color: #555; }
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+
+/* --------------------------------------------------
+   PRINT MODE
+-------------------------------------------------- */
+@media print {
+  body {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .app-header,
+  .settings-section,
+  .form-section,
+  .list-section,
+  .charts-section,
+  .budgets-section,
+  .nav-backdrop,
+  .toast {
+    display: none !important;
+  }
+  .print-area {
+    display: block;
+  }
+}
+
+/* --------------------------------------------------
+   RESPONSIVE (Mobile & Tablet)
+-------------------------------------------------- */
+
+/* LARGE SCREENS: Show Table, Hide Grid (≥768px) */
+@media (min-width: 768px) {
+  .budgets-grid {
+    display: none !important;
+  }
+  
+  .budgets-table-wrapper {
+    display: block !important;
+  }
+  
+  /* UPDATED BUDGET TABLE COLUMN WIDTHS (7 columns) */
+  .budgets-table .col-category { width: 18%; } /* Increased from 20% */
+  .budgets-table .col-progress { width: 18%; } /* Reduced from 25% */
+  .budgets-table .col-status { width: 13%; }
+  .budgets-table .col-spent { width: 13%; }
+  .budgets-table .col-remaining { width: 13%; }
+  .budgets-table .col-budget { width: 13%; } /* Increased from 14% */
+  .budgets-table .col-edit { width: 12%; text-align: center; }
+}
+
+/* TABLET AND MOBILE (< 1024px) */
+@media (max-width: 1024px) {
+  .container {
+    padding: 16px;
+  }
+
+  .app-header {
+    position: relative;
+    padding: 14px 18px;
+  }
+
+  .header-brand {
+    gap: 4px;
+  }
+
+  .brand-logo { font-size: 20px; }
+  .brand-tagline { font-size: 10px; }
+
+  .nav-toggle {
+    display: flex;
+  }
+
+  .header-actions {
+    position: absolute;
+    left: 12px;
+    right: 12px;
+    top: 70px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    transform-origin: top center;
+    transform: scaleY(0);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.15s ease;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+    z-index: 60;
+  }
+
+  .header-actions.active {
+    transform: scaleY(1);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .header-actions .control {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    margin: 0;
+  }
+
+  .header-actions .control span {
+    display: block;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--muted);
+  }
+
+  .header-actions .control input,
+  .header-actions .control select,
+  .header-actions .btn {
+    width: 100%;
+    height: 42px;
+  }
+}
+
+/* DESKTOP (>= 1025px) */
+@media (min-width: 1025px) {
+  .nav-toggle { display: none !important; }
+  .header-actions {
+    position: static !important;
+    transform: none !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    display: flex !important;
+    flex-direction: row !important;
+    background: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+  }
+  .nav-backdrop { display: none !important; }
+}
+
+/* --------------------------------------------------
+   MOBILE (< 768px) LAYOUT FIXES
+-------------------------------------------------- */
+@media (max-width: 767.98px) {
+  .container {
+    padding: 12px;
+    max-width: 100%;
+  }
+
+  /* INSIGHTS CARDS (Summary) */
+  .summary { gap: 10px; }
+  .card { 
+      padding: 10px; /* Reduced padding for compactness */
+      border-radius: 10px; 
+  }
+  .card-value { font-size: 22px; }
+  
+  .card-grid {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  .category-card { padding: 8px; }
+  .category-badge { padding: 4px 8px; }
+
+  .expense-form { grid-template-columns: 1fr; gap: 10px; }
+  .field.grow { grid-column: span 1; }
+  
+  input[type="number"],
+  input[type="text"],
+  input[type="date"],
+  select {
+    font-size: 16px; 
+  }
+  
+  /* CHARTS CARDS FIX: Centered and Compact (Now targets chart canvas for small size) */
+  .charts-grid {
+    grid-template-columns: 1fr; 
+    gap: 12px;
+    justify-items: center; /* Ensure contents are centered */
+  }
+  
+  /* CHART CARD: Revert to auto width, but with reduced padding */
+  .charts-grid .card { 
+      max-width: none; /* Revert explicit max-width */
+      width: 100%; 
+      padding: 10px; /* Match insight card padding */
+      margin: 0 auto; 
+  }
+
+  /* **FIX: Explicitly limit chart size to make them "too small"** */
+  #pieChart, #barChart {
+      max-width: 260px; /* Set a very small maximum size for the chart canvas */
+      height: auto !important; /* Let the aspect ratio handle height */
+      margin: 0 auto; /* Center the chart within the card */
+      display: block; /* Ensure margin auto works */
+  }
+  
+  /* SETTINGS CARDS (Alignment review) */
+  .settings-two-col-row { grid-template-columns: 1fr; gap: 12px; }
+  /* Ensures cards don't have excessive vertical space */
+  .settings-two-col-row .card { 
+      min-height: auto; 
+      padding: 12px; /* Slightly more padding than other mobile cards */
+  }
+  /* Stacks buttons/selects clearly within settings card */
+  .settings-two-col-row select { 
+    max-width: 100%; 
+    margin-top: 6px; 
+  }
+  .settings-two-col-row .data-row { grid-template-columns: 1fr; gap: 8px; }
+
+
+  /* EXPENSE LIST (Card View) */
+  .table-wrap { overflow-x: hidden; } 
+  .table { border: none; }
+  .table thead { display: none; } 
+  
+  .table tbody tr {
+    display: block;
+    margin-bottom: 12px;
+    padding: 10px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  }
+  
+  .table tbody td {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 4px; 
+    border-bottom: 1px dotted #f0f0f0;
+    font-size: 14px; 
+    text-align: right;
+  }
+  
+  .table tbody td:last-child {
+    border-bottom: none;
+    padding-top: 10px;
+    justify-content: flex-end; 
+    gap: 8px;
+  }
+  
+  /* Add pseudo-element content for labels */
+  .table tbody td:nth-child(1):before { content: "Date:"; font-weight: 600; color: var(--muted); margin-right: 10px; text-align: left; }
+  .table tbody td:nth-child(2):before { content: "Category:"; font-weight: 600; color: var(--muted); margin-right: 10px; text-align: left; }
+  .table tbody td:nth-child(3):before { content: "Note:"; font-weight: 600; color: var(--muted); margin-right: 10px; text-align: left; }
+  .table tbody td:nth-child(4):before { content: "Amount:"; font-weight: 600; color: var(--muted); margin-right: 10px; text-align: left; }
+  
+  .action-btn { 
+    padding: 4px 8px; 
+    font-size: 11px;
+  }
+
+  /* MOBILE BUDGETS: Cards Layout */
+  .budgets-table-wrapper {
+    display: none !important;
+  }
+  
+  .budgets-grid {
+    display: grid !important;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .budget-card {
+    padding: 1rem;
+  }
+  
+  .budget-card strong {
+    font-size: 15px;
+  }
+  
+  .budget-card label {
+    font-size: 11px;
+  }
+  
+  .budget-card .budget-input {
+    padding: 6px 8px;
+    font-size: 14px;
+  }
+  
+  /* Total Budget Row Mobile Tweaks */
+  .budget-total-row {
+    grid-template-columns: auto auto 1fr;
+    gap: 8px;
+    padding: 10px 8px;
+  }
+  
+  .budget-total-col.col-1 label {
+    font-size: 11px;
+  }
+  
+  .budget-total-col.col-2 input {
+    width: 80px;
+    padding: 4px 6px;
+    font-size: 12px;
+  }
+  
+  .budget-status {
+    font-size: 10px;
+  }
+}
+
+/* ULTRA SMALL MOBILE (< 480px) */
+@media (max-width: 480px) {
+  .app-header { padding: 10px 14px; }
+  .brand-logo { font-size: 18px; }
+  
+  /* Charts card width now uses 100% width, chart inside is constrained to 260px */
+
+  /* Expense List (Card View) tweaks */
+  .table tbody td {
+      font-size: 13px;
+      padding: 5px 3px;
+  }
+
+  .action-btn { 
+    padding: 3px 6px; 
+    font-size: 10px;
+  }
+  
+  .modal-card { width: 95%; }
+  .modal-footer { gap: 6px; }
+  .modal-cancel, .modal-ok { flex: 1; text-align: center; }
+
+  .receipt-container { padding: 16px 10px; }
+  .print-table { font-size: 9px; }
+  
+  /* Ultra mobile budget adjustments */
+  .budget-total-col.col-2 input {
+    width: 70px;
+  }
+  
+  .budget-card {
+    padding: 0.75rem;
+  }
+  
+  .budget-card .progress {
+    margin: 0.5rem 0;
+  }
+}
