@@ -1,4 +1,4 @@
-# 💜 ANIVIO - Expense Tracker & Budget Manager
+# ANIVIO - Expense Tracker & Budget Manager
 
 <div align="center">
 
