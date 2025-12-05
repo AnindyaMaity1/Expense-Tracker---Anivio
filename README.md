@@ -2,7 +2,7 @@
 
 <div align="center">
 
-![ANIVIO Logo](./image.jpg)
+![ANIVIO Logo](./image.png)
 
 **A Professional, Feature-Rich Expense Tracking & Budget Management Application**
 
