@@ -284,6 +284,6 @@ Found a bug or have a feature request?
 
 **Start tracking your expenses today with ANIVIO!**
 
-[⬆ Back to Top](#-anivio---expense-tracker--budget-manager)
+(#-anivio---expense-tracker--budget-manager)
 
 </div>
